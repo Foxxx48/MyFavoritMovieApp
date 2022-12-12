@@ -1,0 +1,57 @@
+package com.fox.myfavoritmovieapp.data.models
+
+import com.google.gson.annotations.SerializedName
+
+
+data class Movie (
+
+  @SerializedName("externalId"          ) var externalId          : ExternalId?                    = ExternalId(),
+  @SerializedName("logo"                ) var logo                : Logo?                          = Logo(),
+  @SerializedName("poster"              ) var poster              : Poster?                        = Poster(),
+  @SerializedName("backdrop"            ) var backdrop            : Backdrop?                      = Backdrop(),
+  @SerializedName("rating"              ) var rating              : Rating?                        = Rating(),
+  @SerializedName("votes"               ) var votes               : Votes?                         = Votes(),
+  @SerializedName("videos"              ) var videos              : Videos?                        = Videos(),
+  @SerializedName("budget"              ) var budget              : Budget?                        = Budget(),
+  @SerializedName("fees"                ) var fees                : Fees?                          = Fees(),
+  @SerializedName("distributors"        ) var distributors        : Distributors?                  = Distributors(),
+  @SerializedName("premiere"            ) var premiere            : Premiere?                      = Premiere(),
+  @SerializedName("images"              ) var images              : Images?                        = Images(),
+  @SerializedName("watchability"        ) var watchability        : Watchability?                  = Watchability(),
+  @SerializedName("collections"         ) var collections         : ArrayList<String>              = arrayListOf(),
+  @SerializedName("updateDates"         ) var updateDates         : ArrayList<String>              = arrayListOf(),
+  @SerializedName("status"              ) var status              : String?                        = null,
+  @SerializedName("movieLength"         ) var movieLength         : Int?                           = null,
+  @SerializedName("productionCompanies" ) var productionCompanies : ArrayList<ProductionCompanies> = arrayListOf(),
+  @SerializedName("spokenLanguages"     ) var spokenLanguages     : ArrayList<SpokenLanguages>     = arrayListOf(),
+  @SerializedName("id"                  ) var id                  : Int?                           = null,
+  @SerializedName("type"                ) var type                : String?                        = null,
+  @SerializedName("name"                ) var name                : String?                        = null,
+  @SerializedName("description"         ) var description         : String?                        = null,
+  @SerializedName("slogan"              ) var slogan              : String?                        = null,
+  @SerializedName("year"                ) var year                : Int?                           = null,
+  @SerializedName("facts"               ) var facts               : ArrayList<Facts>               = arrayListOf(),
+  @SerializedName("genres"              ) var genres              : ArrayList<Genres>              = arrayListOf(),
+  @SerializedName("countries"           ) var countries           : ArrayList<Countries>           = arrayListOf(),
+  @SerializedName("seasonsInfo"         ) var seasonsInfo         : ArrayList<String>              = arrayListOf(),
+  @SerializedName("persons"             ) var persons             : ArrayList<Persons>             = arrayListOf(),
+  @SerializedName("lists"               ) var lists               : ArrayList<String>              = arrayListOf(),
+  @SerializedName("typeNumber"          ) var typeNumber          : Int?                           = null,
+  @SerializedName("alternativeName"     ) var alternativeName     : String?                        = null,
+  @SerializedName("enName"              ) var enName              : String?                        = null,
+  @SerializedName("names"               ) var names               : ArrayList<Names>               = arrayListOf(),
+  @SerializedName("updatedAt"           ) var updatedAt           : String?                        = null,
+  @SerializedName("ratingMpaa"          ) var ratingMpaa          : String?                        = null,
+  @SerializedName("shortDescription"    ) var shortDescription    : String?                        = null,
+  @SerializedName("technology"          ) var technology          : Technology?                    = Technology(),
+  @SerializedName("ticketsOnSale"       ) var ticketsOnSale       : Boolean?                       = null,
+  @SerializedName("sequelsAndPrequels"  ) var sequelsAndPrequels  : ArrayList<SequelsAndPrequels>  = arrayListOf(),
+  @SerializedName("similarMovies"       ) var similarMovies       : ArrayList<String>              = arrayListOf(),
+  @SerializedName("imagesInfo"          ) var imagesInfo          : ImagesInfo?                    = ImagesInfo(),
+  @SerializedName("ageRating"           ) var ageRating           : Int?                           = null,
+  @SerializedName("top10"               ) var top10               : String?                        = null,
+  @SerializedName("top250"              ) var top250              : Int?                           = null,
+  @SerializedName("createDate"          ) var createDate          : String?                        = null,
+  @SerializedName("releaseYears"        ) var releaseYears        : ArrayList<String>              = arrayListOf()
+
+)
