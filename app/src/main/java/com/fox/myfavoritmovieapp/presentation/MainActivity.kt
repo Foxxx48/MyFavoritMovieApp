@@ -4,9 +4,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
+import com.fox.myfavoritmovieapp.data.RetrofitHelper
+import com.fox.myfavoritmovieapp.data.models.Movie
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
 
 import com.fox.myfavoritmovieapp.utils.NetworkUtils
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import java.net.HttpURLConnection
@@ -18,23 +21,36 @@ class MainActivity : AppCompatActivity() {
     private val binding
         get() = _binding ?: throw RuntimeException("ActivityMainBinding = null")
 
+    var movie = Movie()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        myLog(NetworkUtils.buildURL(5))
-        val url = NetworkUtils.buildURL(5).toString()
-        myLog(url)
-
-        binding.btnDisplay.setOnClickListener {
-            lifecycleScope.launch(Dispatchers.IO) {
-                val connection = URL(url).openConnection() as HttpURLConnection
-                val data = connection.inputStream.bufferedReader().readText()
-                val intent = DisplayUrlActivity.newIntent(this@MainActivity, data)
-                startActivity(intent)
-            }
+        val movieApi = RetrofitHelper.getMovieApi()
+        CoroutineScope(Dispatchers.IO).launch {
+            val data = movieApi.getListMovies()
+            movie = data.body()!!
+            myLog(movie)
         }
+
+
+//        myLog(NetworkUtils.buildURL(5))
+//        val url = NetworkUtils.buildURL(5).toString()
+//        myLog(url)
+//
+//        binding.btnDisplay.setOnClickListener {
+//            lifecycleScope.launch(Dispatchers.IO) {
+//                val connection = URL(url).openConnection() as HttpURLConnection
+//                val data = connection.inputStream.bufferedReader().readText()
+//
+//                val intent = DisplayUrlActivity.newIntent(this@MainActivity, data)
+//                startActivity(intent)
+//            }
+//        }
+
+
     }
 
     override fun onDestroy() {
