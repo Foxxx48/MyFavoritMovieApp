@@ -27,12 +27,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        myLog(movie)
 
         val movieApi = RetrofitHelper.getMovieApi()
+
         CoroutineScope(Dispatchers.IO).launch {
-            val data = movieApi.getListMovies()
-            movie = data.body()!!
-            myLog(movie)
+//            val data = movieApi.getListMovies()
+            val data = movieApi.getMovieFromKPForId(326)
+            myLog(data)
+
+
+
         }
 
 
