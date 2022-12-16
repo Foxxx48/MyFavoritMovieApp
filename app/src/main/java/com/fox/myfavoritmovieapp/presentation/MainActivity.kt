@@ -7,6 +7,8 @@ import androidx.lifecycle.lifecycleScope
 import com.fox.myfavoritmovieapp.data.RetrofitHelper
 import com.fox.myfavoritmovieapp.data.models.Movie
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
+import com.fox.myfavoritmovieapp.service.KPApiClientService
+import com.fox.myfavoritmovieapp.service.KinopoiskApiService
 
 import com.fox.myfavoritmovieapp.utils.NetworkUtils
 import kotlinx.coroutines.CoroutineScope
@@ -27,14 +29,17 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        myLog(movie)
+//        myLog(movie)
 
         val movieApi = RetrofitHelper.getMovieApi()
 
         CoroutineScope(Dispatchers.IO).launch {
 //            val data = movieApi.getListMovies()
-            val data = movieApi.getMovieFromKPForId(326)
-            myLog(data)
+//            val data = movieApi.getMovieFromKPForId(326)
+//            myLog(data)
+            val kinopoiskApiService = KinopoiskApiService(NetworkUtils.API_KEY2, 10000)
+            val film = kinopoiskApiService.getFilm(399)
+            myLog(film)
         }
 
 

@@ -1,5 +1,29 @@
 package com.fox.myfavoritmovieapp.service
 
+import com.fox.myfavoritmovieapp.data.model.MyResult
+import com.fox.myfavoritmovieapp.data.model.movie.AppendType
+import com.fox.myfavoritmovieapp.data.model.movie.Film
+import com.fox.myfavoritmovieapp.data.model.movie.frames.GalleryResult
+import com.fox.myfavoritmovieapp.data.model.movie.related.RelatedFilmItem
+import com.fox.myfavoritmovieapp.data.model.movie.studio.StudioResult
+import com.fox.myfavoritmovieapp.data.model.movie.video.VideoResult
+import com.fox.myfavoritmovieapp.data.model.search.movie.keyword.SearchResult
+import com.fox.myfavoritmovieapp.data.model.staff.Person
+import com.fox.myfavoritmovieapp.data.model.staff.StaffItem
+import com.fox.myfavoritmovieapp.data.model.top.movie.TopResult
+import com.fox.myfavoritmovieapp.data.model.top.movie.TopType
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.GET_FILM
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.GET_FRAMES
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.GET_SEQUELS_AND_PREQUELS
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.GET_STAFF
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.GET_STUDIOS
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.GET_TOP
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.GET_VIDEOS
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.MAIN_API_URL_V1
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.MAIN_API_URL_V2_1
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.MAIN_API_URL_V2_2
+import com.fox.myfavoritmovieapp.service.KPApiClientService.Companion.SEARCH_BY_KEYWORD
+
 class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
     private val kpApiClientService: KPApiClientService = KPApiClientService(token, timeoutMs)
 
@@ -9,7 +33,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
      * @param kinopoiskId id of film from kinopoisk.
      * @param appendTypes to add additional info to response. See [AppendType].
      */
-    fun getFilm(kinopoiskId: Int, appendTypes: Iterable<AppendType> = emptyList()): Result<Film> {
+    fun getFilm(kinopoiskId: Int, appendTypes: Iterable<AppendType> = emptyList()): MyResult<Film> {
         require(kinopoiskId > 0) { "Film id should be more than 0" }
         val appends = appendTypes.joinToString()
         return kpApiClientService.request(
@@ -24,7 +48,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
      *
      * @param kinopoiskId id of film from kinopoisk.
      */
-    fun getFrames(kinopoiskId: Int): Result<GalleryResult> {
+    fun getFrames(kinopoiskId: Int): MyResult<GalleryResult> {
         require(kinopoiskId > 0) { "Film id should be more than 0" }
         return kpApiClientService.request(
             MAIN_API_URL_V2_1,
@@ -38,7 +62,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
      *
      * @param kinopoiskId id of film from kinopoisk.
      */
-    fun getVideos(kinopoiskId: Int): Result<VideoResult> {
+    fun getVideos(kinopoiskId: Int): MyResult<VideoResult> {
         require(kinopoiskId > 0) { "Film id should be more than 0" }
         return kpApiClientService.request(
             MAIN_API_URL_V2_1,
@@ -52,7 +76,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
      *
      * @param kinopoiskId id of film from kinopoisk.
      */
-    fun getStudios(kinopoiskId: Int): Result<StudioResult> {
+    fun getStudios(kinopoiskId: Int): MyResult<StudioResult> {
         require(kinopoiskId > 0) { "Film id should be more than 0" }
         return kpApiClientService.request(
             MAIN_API_URL_V2_1,
@@ -66,7 +90,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
      *
      * @param kinopoiskId id of film from kinopoisk.
      */
-    fun getSequelsAndPrequels(kinopoiskId: Int): Result<List<RelatedFilmItem>> {
+    fun getSequelsAndPrequels(kinopoiskId: Int): MyResult<List<RelatedFilmItem>> {
         require(kinopoiskId > 0) { "Film id should be more than 0" }
         return kpApiClientService.request(
             MAIN_API_URL_V2_1,
@@ -81,7 +105,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
      * @param keyword keyword to search.
      * @param page page.
      */
-    fun searchByKeyword(keyword: String, page: Int = 1): Result<SearchResult> {
+    fun searchByKeyword(keyword: String, page: Int = 1): MyResult<SearchResult> {
         return kpApiClientService.request(
             MAIN_API_URL_V2_1,
             "$GET_FILM$SEARCH_BY_KEYWORD?keyword=$keyword&page=$page",
@@ -95,7 +119,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
      * @param topType see [TopType].
      * @param page page.
      */
-    fun getTop(topType: TopType, page: Int = 1): Result<TopResult> {
+    fun getTop(topType: TopType, page: Int = 1): MyResult<TopResult> {
         return kpApiClientService.request(
             MAIN_API_URL_V2_2,
             "$GET_FILM$GET_TOP?type=$topType&page=$page",
@@ -108,7 +132,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
      *
      * @param kinopoiskFilmId film id.
      */
-    fun getStaff(kinopoiskFilmId: Int): Result<List<StaffItem>> {
+    fun getStaff(kinopoiskFilmId: Int): MyResult<List<StaffItem>> {
         return kpApiClientService.request(
             MAIN_API_URL_V1,
             "$GET_STAFF?filmId=$kinopoiskFilmId",
@@ -121,7 +145,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
      *
      * @param kinopoiskId person id.
      */
-    fun getPerson(kinopoiskId: Int): Result<Person> {
+    fun getPerson(kinopoiskId: Int): MyResult<Person> {
         return kpApiClientService.request(
             MAIN_API_URL_V1,
             "$GET_STAFF/$kinopoiskId",
