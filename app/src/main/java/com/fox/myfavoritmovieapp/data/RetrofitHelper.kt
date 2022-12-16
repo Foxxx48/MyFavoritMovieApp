@@ -21,6 +21,7 @@ object RetrofitHelper {
             .connectTimeout(CONNECT_TIMEOUT, TimeUnit.SECONDS)
             .connectionPool(ConnectionPool(0, 5, TimeUnit.MINUTES))
 
+
         var retrofit = Retrofit.Builder()
             .baseUrl("http://example.com/")
             .addConverterFactory(GsonConverterFactory.create())

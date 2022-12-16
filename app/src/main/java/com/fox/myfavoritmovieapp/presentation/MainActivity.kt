@@ -35,9 +35,6 @@ class MainActivity : AppCompatActivity() {
 //            val data = movieApi.getListMovies()
             val data = movieApi.getMovieFromKPForId(326)
             myLog(data)
-
-
-
         }
 
 
@@ -57,6 +54,7 @@ class MainActivity : AppCompatActivity() {
 
 
     }
+
 
     override fun onDestroy() {
         super.onDestroy()
