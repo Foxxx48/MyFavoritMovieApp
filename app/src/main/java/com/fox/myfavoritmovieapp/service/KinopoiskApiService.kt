@@ -2,6 +2,7 @@ package com.fox.myfavoritmovieapp.service
 
 import com.fox.myfavoritmovieapp.data.model.MyResult
 import com.fox.myfavoritmovieapp.data.model.movie.AppendType
+import com.fox.myfavoritmovieapp.data.model.movie.Common
 import com.fox.myfavoritmovieapp.data.model.movie.Film
 import com.fox.myfavoritmovieapp.data.model.movie.frames.GalleryResult
 import com.fox.myfavoritmovieapp.data.model.movie.related.RelatedFilmItem
@@ -162,5 +163,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
             SearchForRatingResult::class.java
         )
     }
+
+
 }
 //kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=ALL&ratingFrom=8&ratingTo=10&yearFrom=1000&yearTo=3000&page=1
