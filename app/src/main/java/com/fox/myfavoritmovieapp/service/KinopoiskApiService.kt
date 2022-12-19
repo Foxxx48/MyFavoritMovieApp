@@ -8,6 +8,7 @@ import com.fox.myfavoritmovieapp.data.model.movie.related.RelatedFilmItem
 import com.fox.myfavoritmovieapp.data.model.movie.studio.StudioResult
 import com.fox.myfavoritmovieapp.data.model.movie.video.VideoResult
 import com.fox.myfavoritmovieapp.data.model.search.movie.keyword.SearchResult
+import com.fox.myfavoritmovieapp.data.model.searchforrating.SearchForRatingResult
 import com.fox.myfavoritmovieapp.data.model.staff.Person
 import com.fox.myfavoritmovieapp.data.model.staff.StaffItem
 import com.fox.myfavoritmovieapp.data.model.top.movie.TopResult
@@ -41,6 +42,7 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
             "$GET_FILM/$kinopoiskId?append_to_response=$appends",
             Film::class.java
         )
+
     }
 
     /**
@@ -152,4 +154,13 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
             Person::class.java
         )
     }
+
+    fun getFilmsForRating(ratingFrom: Int, ratingTo: Int, page: Int): MyResult<SearchForRatingResult> {
+        return kpApiClientService.request(
+            MAIN_API_URL_V2_2,
+            "$GET_FILM?order=RATING&type=ALL&ratingFrom=$ratingFrom&ratingTo=$ratingTo&yearFrom=1000&yearTo=3000&page=$page",
+            SearchForRatingResult::class.java
+        )
+    }
 }
+//kinopoiskapiunofficial.tech/api/v2.2/films?order=RATING&type=ALL&ratingFrom=8&ratingTo=10&yearFrom=1000&yearTo=3000&page=1

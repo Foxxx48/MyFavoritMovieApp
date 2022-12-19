@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import com.fox.myfavoritmovieapp.data.RetrofitHelper
+import com.fox.myfavoritmovieapp.data.model.top.movie.TopType
 import com.fox.myfavoritmovieapp.data.models.Movie
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
 import com.fox.myfavoritmovieapp.service.KPApiClientService
@@ -38,8 +39,20 @@ class MainActivity : AppCompatActivity() {
 //            val data = movieApi.getMovieFromKPForId(326)
 //            myLog(data)
             val kinopoiskApiService = KinopoiskApiService(NetworkUtils.API_KEY2, 10000)
-            val film = kinopoiskApiService.getFilm(399)
-            myLog(film)
+
+//            val film = kinopoiskApiService.getFilm(399)
+            val resultFilms = kinopoiskApiService.getFilmsForRating(7,9,1)
+
+            val films = resultFilms.getOrThrowException().items
+            films.forEach {
+                myLog(it)
+            }
+
+//            val topResult = kinopoiskApiService.getTop(TopType.TOP_250_BEST_FILMS, 1)
+//            val topFilms = topResult.getOrThrowException().films
+//            topFilms.forEach {
+//                myLog(it)
+//            }
         }
 
 
@@ -66,11 +79,13 @@ class MainActivity : AppCompatActivity() {
         _binding = null
     }
 
-    fun myLog(message: Any?) {
-        Log.d(TAG, "Main Activity: $message")
-    }
+
 
     companion object {
         const val TAG = "myApp"
+
+        fun myLog(message: Any?) {
+            Log.d(TAG, "Main Activity: $message")
+        }
     }
 }

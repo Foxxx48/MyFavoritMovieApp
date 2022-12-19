@@ -24,6 +24,7 @@ object RetrofitHelper {
 
         var retrofit = Retrofit.Builder()
             .baseUrl("http://example.com/")
+
             .addConverterFactory(GsonConverterFactory.create())
             .client(httpClient.build())
             .build()
