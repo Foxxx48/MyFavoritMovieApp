@@ -7,7 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
-import com.fox.myfavoritmovieapp.presentation.adapters.filmadapter.SearchForRatingItemAdapter
+import com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter.SearchForRatingItemAdapter
 
 class MainActivity : AppCompatActivity() {
 

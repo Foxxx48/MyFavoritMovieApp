@@ -48,33 +48,24 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
-            <ImageView
-                android:id="@+id/iv_poster_preview"
-                android:layout_width="match_parent"
-                android:layout_height="0dp"
-                android:adjustViewBounds="true"
-                app:layout_constraintBottom_toTopOf="@+id/guideline6"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:srcCompat="@tools:sample/avatars" />
-
             <TextView
                 android:id="@+id/tv_film_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constrainedWidth="true"
                 android:text="Games of throne"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                app:layout_constrainedWidth="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/guideline6" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guideline6"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_begin="579dp" />
+                app:layout_constraintGuide_begin="516dp" />
 
             <TextView
                 android:id="@+id/tv_genre"
@@ -86,6 +77,18 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/tv_film_name" />
+
+            <ImageView
+                android:id="@+id/iv_poster_preview"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:adjustViewBounds="true"
+                android:visibility="visible"
+                app:layout_constraintBottom_toTopOf="@+id/guideline6"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:srcCompat="@drawable/mj_poster_preview" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.cardview.widget.CardView>
@@ -95,6 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Rating"
+        android:backgroundTint="#15B8A9"
         android:background="@drawable/my_button"
 
         android:textSize="20sp"

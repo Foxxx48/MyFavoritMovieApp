@@ -1,4 +1,4 @@
-package com.fox.myfavoritmovieapp.presentation.adapters.filmadapter
+package com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,6 +7,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.fox.myfavoritmovieapp.data.model.searchforrating.SearchForRatingItem
 
 import com.fox.myfavoritmovieapp.databinding.FilmItemBinding
+import com.fox.myfavoritmovieapp.presentation.MainActivity
 import com.fox.myfavoritmovieapp.utils.GlideApp
 
 class SearchForRatingItemAdapter() : ListAdapter<SearchForRatingItem, SearchForRatingItemViewHolder>(SearchForRatingItemDiffCallback) {
@@ -36,6 +37,7 @@ class SearchForRatingItemAdapter() : ListAdapter<SearchForRatingItem, SearchForR
         holder.binding.tvGenre.text = filmItem.genres.toString()
 
         val urlImage = filmItem.posterUrlPreview
+        MainActivity.myLog(urlImage)
         GlideApp.with(holder.itemView.context)
             .load(urlImage)
             .skipMemoryCache(true)

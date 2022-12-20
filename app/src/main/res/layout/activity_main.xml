@@ -43,22 +43,11 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_films"
         android:layout_width="0dp"
-        android:layout_height="606dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline2"
-        app:layout_constraintEnd_toStartOf="@+id/gl_end"
-        app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toTopOf="@+id/gl_top"
-        app:layout_constraintVertical_bias="0.248" />
-
-    <Button
-        android:id="@+id/btn_image"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Display Image"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@+id/gl_bottom"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
-        app:layout_constraintTop_toTopOf="@+id/guideline2" />
+        app:layout_constraintTop_toTopOf="@+id/gl_top" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline2"

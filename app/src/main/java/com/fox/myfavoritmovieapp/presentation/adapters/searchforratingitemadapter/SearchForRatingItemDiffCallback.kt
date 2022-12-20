@@ -1,4 +1,4 @@
-package com.fox.myfavoritmovieapp.presentation.adapters.filmadapter
+package com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter
 
 import androidx.recyclerview.widget.DiffUtil
 import com.fox.myfavoritmovieapp.data.model.searchforrating.SearchForRatingItem
