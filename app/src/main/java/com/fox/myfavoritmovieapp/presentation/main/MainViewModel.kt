@@ -1,4 +1,4 @@
-package com.fox.myfavoritmovieapp.presentation
+package com.fox.myfavoritmovieapp.presentation.main
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,21 +16,12 @@ class MainViewModel : ViewModel() {
     val films: LiveData<List<SearchForRatingItem>>
         get() = _films
 
-    fun getSearchForRatingItems(){
+    fun getSearchForRatingItems() {
         viewModelScope.launch(Dispatchers.IO) {
-                val kinopoiskApiService = KinopoiskApiService(NetworkUtils.API_KEY2, 10000)
+            val kinopoiskApiService = KinopoiskApiService(NetworkUtils.API_KEY2, 10000)
             val data = kinopoiskApiService.getFilmsForRating(8, 9, 1)
             var myFilms = data.getOrThrowException().items
             _films.postValue(myFilms)
         }
     }
-
-
-
-
-
-
-
-
-
 }

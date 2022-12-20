@@ -7,7 +7,7 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.fox.myfavoritmovieapp.data.model.searchforrating.SearchForRatingItem
 
 import com.fox.myfavoritmovieapp.databinding.FilmItemBinding
-import com.fox.myfavoritmovieapp.presentation.MainActivity
+import com.fox.myfavoritmovieapp.presentation.main.MainActivity
 import com.fox.myfavoritmovieapp.utils.GlideApp
 
 class SearchForRatingItemAdapter() : ListAdapter<SearchForRatingItem, SearchForRatingItemViewHolder>(SearchForRatingItemDiffCallback) {
@@ -34,7 +34,9 @@ class SearchForRatingItemAdapter() : ListAdapter<SearchForRatingItem, SearchForR
         }
 
         holder.binding.tvFilmName.text = filmItem.nameRu
-        holder.binding.tvGenre.text = filmItem.genres.toString()
+        val genre = filmItem.genres.toString().replace("[", "").replace("]", "")
+
+        holder.binding.tvGenre.text = genre
 
         val urlImage = filmItem.posterUrlPreview
         MainActivity.myLog(urlImage)

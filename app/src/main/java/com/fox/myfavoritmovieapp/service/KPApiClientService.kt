@@ -2,12 +2,10 @@ package com.fox.myfavoritmovieapp.service
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
-import com.fasterxml.jackson.databind.json.JsonMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fox.myfavoritmovieapp.data.model.MyResult
-import com.fox.myfavoritmovieapp.presentation.MainActivity
+import com.fox.myfavoritmovieapp.presentation.main.MainActivity
 import com.github.kittinunf.fuel.httpGet
-import com.github.kittinunf.fuel.httpPost
 
 
 internal class KPApiClientService(private val token: String, private val timeout: Int) {
