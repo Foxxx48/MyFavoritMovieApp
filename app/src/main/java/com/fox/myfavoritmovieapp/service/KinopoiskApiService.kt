@@ -2,8 +2,7 @@ package com.fox.myfavoritmovieapp.service
 
 import com.fox.myfavoritmovieapp.data.model.MyResult
 import com.fox.myfavoritmovieapp.data.model.movie.AppendType
-import com.fox.myfavoritmovieapp.data.model.movie.Common
-import com.fox.myfavoritmovieapp.data.model.movie.Film
+import com.fox.myfavoritmovieapp.data.model.movie.SearchForRatingItem
 import com.fox.myfavoritmovieapp.data.model.movie.frames.GalleryResult
 import com.fox.myfavoritmovieapp.data.model.movie.related.RelatedFilmItem
 import com.fox.myfavoritmovieapp.data.model.movie.studio.StudioResult
@@ -35,13 +34,13 @@ class KinopoiskApiService(token: String, timeoutMs: Int = 15000) {
      * @param kinopoiskId id of film from kinopoisk.
      * @param appendTypes to add additional info to response. See [AppendType].
      */
-    fun getFilm(kinopoiskId: Int, appendTypes: Iterable<AppendType> = emptyList()): MyResult<Film> {
+    fun getFilm(kinopoiskId: Int, appendTypes: Iterable<AppendType> = emptyList()): MyResult<SearchForRatingItem> {
         require(kinopoiskId > 0) { "Film id should be more than 0" }
         val appends = appendTypes.joinToString()
         return kpApiClientService.request(
             MAIN_API_URL_V2_1,
             "$GET_FILM/$kinopoiskId?append_to_response=$appends",
-            Film::class.java
+            SearchForRatingItem::class.java
         )
 
     }

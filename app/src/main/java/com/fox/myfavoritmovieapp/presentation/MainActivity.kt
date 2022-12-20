@@ -3,19 +3,11 @@ package com.fox.myfavoritmovieapp.presentation
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.fox.myfavoritmovieapp.data.RetrofitHelper
-import com.fox.myfavoritmovieapp.data.model.MyResult
-import com.fox.myfavoritmovieapp.data.model.movie.Common
-import com.fox.myfavoritmovieapp.data.model.movie.Film
+import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
-import com.fox.myfavoritmovieapp.service.KinopoiskApiService
-import com.fox.myfavoritmovieapp.utils.GlideApp
-
-import com.fox.myfavoritmovieapp.utils.NetworkUtils
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import com.fox.myfavoritmovieapp.presentation.adapters.filmadapter.SearchForRatingItemAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -23,74 +15,46 @@ class MainActivity : AppCompatActivity() {
     private val binding
         get() = _binding ?: throw RuntimeException("ActivityMainBinding = null")
 
-    var film : MyResult<Film>? = null
-    var urlImage: String? = null
+//    var film : MyResult<SearchForRatingItem>? = null
+//    var urlImage: String? = null
+
+    private val viewModel by lazy {
+        ViewModelProvider(this@MainActivity)[MainViewModel::class.java]
+    }
+
+    private lateinit var searchForRatingItemAdapter: SearchForRatingItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-//        myLog(movie)
-
-        val movieApi = RetrofitHelper.getMovieApi()
-
-        CoroutineScope(Dispatchers.IO).launch {
-//            val data = movieApi.getListMovies()
-//            val data = movieApi.getMovieFromKPForId(326)
-//            myLog(data)
-            val kinopoiskApiService = KinopoiskApiService(NetworkUtils.API_KEY2, 10000)
-
-            film = kinopoiskApiService.getFilm(399)
-            urlImage = film?.getOrThrowException()?.data?.posterUrlPreview
-            myLog(urlImage)
-//            val image = film?.getOrThrowException()?.images?.posters?.get(0)
-//            urlImage = image?.url
-//            val resultFilms = kinopoiskApiService.getFilmsForRating(7,9,1)
-
-//            val films = resultFilms.getOrThrowException().items
-//            films.forEach {
-//                myLog(it)
-//            }
+        viewModel.getSearchForRatingItems()
+        setupRecyclerView()
 
 
-
-//            val topResult = kinopoiskApiService.getTop(TopType.TOP_250_BEST_FILMS, 1)
-//            val topFilms = topResult.getOrThrowException().films
-//            topFilms.forEach {
-//                myLog(it)
-//            }
+        viewModel.films.observe(this) {
+            searchForRatingItemAdapter.submitList(it)
         }
 
-        binding.btnImage.setOnClickListener {
-            getImage()
-        }
-
-
-//        myLog(NetworkUtils.buildURL(5))
-//        val url = NetworkUtils.buildURL(5).toString()
-//        myLog(url)
+//        CoroutineScope(Dispatchers.IO).launch {
 //
-//        binding.btnDisplay.setOnClickListener {
-//            lifecycleScope.launch(Dispatchers.IO) {
-//                val connection = URL(url).openConnection() as HttpURLConnection
-//                val data = connection.inputStream.bufferedReader().readText()
+//            val kinopoiskApiService = KinopoiskApiService(NetworkUtils.API_KEY2, 10000)
 //
-//                val intent = DisplayUrlActivity.newIntent(this@MainActivity, data)
-//                startActivity(intent)
-//            }
+//            film = kinopoiskApiService.getFilm(399)
+//            urlImage = film?.getOrThrowException()?.data?.posterUrlPreview
+//            myLog(urlImage)
+//
 //        }
+    }
 
+    private fun setupRecyclerView() {
+        searchForRatingItemAdapter = SearchForRatingItemAdapter()
+        binding.rvFilms.layoutManager = LinearLayoutManager(this, VERTICAL, false)
+        binding.rvFilms.adapter = searchForRatingItemAdapter
 
     }
 
-    private fun getImage() {
-        GlideApp.with(this)
-            .load(urlImage)
-            .skipMemoryCache(true)
-            .diskCacheStrategy(DiskCacheStrategy.NONE)
-//            .placeholder(R.drawable.ic_action_point)
-            .into(binding.imageView)
-    }
+
 
 
     override fun onDestroy() {
@@ -108,3 +72,5 @@ class MainActivity : AppCompatActivity() {
         }
     }
 }
+
+
