@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
 import com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter.SearchForRatingItemAdapter
@@ -41,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupRecyclerView() {
         searchForRatingItemAdapter = SearchForRatingItemAdapter()
 //        binding.rvFilms.layoutManager = LinearLayoutManager(this, VERTICAL, false)
-        binding.rvFilms.layoutManager = GridLayoutManager(this, 2, VERTICAL, false)
+        binding.rvFilms.layoutManager = GridLayoutManager(this, 2, HORIZONTAL, false)
         binding.rvFilms.adapter = searchForRatingItemAdapter
 
     }
