@@ -16,12 +16,17 @@ class MainViewModel : ViewModel() {
     val films: LiveData<List<SearchForRatingItem>>
         get() = _films
 
-    fun getSearchForRatingItems() {
+
+    fun getSearchForRatingItems(ratingFrom: Int, ratingTo: Int, page: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val kinopoiskApiService = KinopoiskApiService(NetworkUtils.API_KEY2, 10000)
-            val data = kinopoiskApiService.getFilmsForRating(8, 9, 1)
+            val data = kinopoiskApiService.getFilmsForRating(ratingFrom, ratingTo, page)
             var myFilms = data.getOrThrowException().items
             _films.postValue(myFilms)
         }
+    }
+
+    companion object {
+        var PAGE_OF_RATING_ITEM = 1
     }
 }

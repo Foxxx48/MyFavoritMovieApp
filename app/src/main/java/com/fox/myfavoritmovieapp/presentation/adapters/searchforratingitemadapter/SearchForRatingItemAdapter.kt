@@ -34,9 +34,11 @@ class SearchForRatingItemAdapter() : ListAdapter<SearchForRatingItem, SearchForR
         }
 
         holder.binding.tvFilmName.text = filmItem.nameRu
-        val genre = filmItem.genres.toString().replace("[", "").replace("]", "")
 
+        val genre = filmItem.genres.toString().replace("[", "").replace("]", "")
         holder.binding.tvGenre.text = genre
+
+        holder.binding.tvRating.text = filmItem.ratingKinopoisk
 
         val urlImage = filmItem.posterUrlPreview
         MainActivity.myLog(urlImage)

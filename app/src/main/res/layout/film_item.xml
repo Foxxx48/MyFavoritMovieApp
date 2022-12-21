@@ -15,7 +15,7 @@
         android:layout_width="30dp"
         android:layout_height="15dp"
         android:layout_marginTop="16dp"
-        android:background="@drawable/my_button"
+        android:background="@drawable/rating_shape"
         android:backgroundTint="#15B8A9"
         android:elevation="@dimen/cardview_compat_inset_shadow"
         android:gravity="center|center_horizontal|center_vertical"

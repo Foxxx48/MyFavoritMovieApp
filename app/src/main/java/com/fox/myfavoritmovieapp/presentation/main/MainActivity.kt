@@ -2,6 +2,7 @@ package com.fox.myfavoritmovieapp.presentation.main
 
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
@@ -20,6 +21,8 @@ class MainActivity : AppCompatActivity() {
     private val viewModel by lazy {
         ViewModelProvider(this@MainActivity)[MainViewModel::class.java]
     }
+    var ratingFrom = 5
+    var ratingTo = 10
 
     private lateinit var searchForRatingItemAdapter: SearchForRatingItemAdapter
 
@@ -28,12 +31,25 @@ class MainActivity : AppCompatActivity() {
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.getSearchForRatingItems()
+        viewModel.getSearchForRatingItems(ratingFrom, ratingTo, MainViewModel.PAGE_OF_RATING_ITEM)
 
         setupRecyclerView()
 
         viewModel.films.observe(this) {
             searchForRatingItemAdapter.submitList(it)
+        }
+
+        binding.btnNext.setOnClickListener {
+            viewModel.getSearchForRatingItems(ratingFrom, ratingTo, ++ MainViewModel.PAGE_OF_RATING_ITEM)
+        }
+
+        binding.btnPrevious.setOnClickListener {
+            if (MainViewModel.PAGE_OF_RATING_ITEM != 0) {
+                viewModel.getSearchForRatingItems(ratingFrom, ratingTo, MainViewModel.PAGE_OF_RATING_ITEM --)
+            } else {
+                Toast.makeText(this, "It is first page", Toast.LENGTH_SHORT).show()
+            }
+
         }
 
 
