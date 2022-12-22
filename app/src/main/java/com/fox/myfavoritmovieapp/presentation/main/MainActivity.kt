@@ -62,10 +62,15 @@ class MainActivity : AppCompatActivity() {
             binding.switchSort.isChecked = false
         }
 
-       topItemAdapter.onTopItemClickListener = {
+        topItemAdapter.onTopItemClickListener = {
             val intent = TopItemActivity.newIntentTopItem(this, it)
-           startActivity(intent)
-       }
+            startActivity(intent)
+        }
+
+        topItemAdapter.onReachEndListener = {
+            Toast.makeText(this, "End of List", Toast.LENGTH_SHORT).show()
+            viewModel.getTopRatingItems(TopType.TOP_250_BEST_FILMS, MainViewModel.NUMBER_OF_PAGE ++)
+        }
 
 
 

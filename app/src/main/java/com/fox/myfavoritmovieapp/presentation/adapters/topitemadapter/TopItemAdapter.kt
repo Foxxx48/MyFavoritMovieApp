@@ -14,6 +14,7 @@ class TopItemAdapter : ListAdapter<TopItem, TopItemViewHolder>(
 ) {
     var onTopItemLongClickListener: ((TopItem) -> Unit)? = null
     var onTopItemClickListener: ((TopItem) -> Unit)? = null
+    var onReachEndListener: ((TopItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopItemViewHolder {
         val binding = FilmItemBinding
@@ -23,6 +24,11 @@ class TopItemAdapter : ListAdapter<TopItem, TopItemViewHolder>(
 
     override fun onBindViewHolder(holder: TopItemViewHolder, position: Int) {
         val filmItem = getItem(position)
+
+        if (position > currentList.size  - 2) {
+            onReachEndListener?.invoke(filmItem)
+        }
+
 
         holder.binding.root.setOnClickListener {
             onTopItemClickListener?.invoke(filmItem)
