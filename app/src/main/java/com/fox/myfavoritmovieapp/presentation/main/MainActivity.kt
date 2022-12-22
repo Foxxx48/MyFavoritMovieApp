@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
+import com.fox.myfavoritmovieapp.R
 import com.fox.myfavoritmovieapp.data.model.top.movie.TopType
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
 import com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter.SearchForRatingItemAdapter
@@ -35,18 +36,31 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 //       viewModel.getSearchForRatingItems(ratingFrom, ratingTo, MainViewModel.NUMBER_OF_PAGE)
 
-        setMethodOfSort(binding.switch1.isChecked)
+        setMethodOfSort(binding.switchSort.isChecked)
         setupRecyclerView(topItemAdapter)
         viewModel.films_popularity.observe(this) {
             topItemAdapter.submitList(it)
         }
 
-        binding.switch1.setOnCheckedChangeListener { buttonView, isChecked ->
+        binding.switchSort.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 setMethodOfSort(isChecked)
             } else {
                 setMethodOfSort(isChecked)
             }
+        }
+
+        binding.tvMostPopular.setOnClickListener {
+            setMethodOfSort(false)
+            binding.switchSort.isChecked = false
+
+        }
+
+        binding.tvTopBest250.setOnClickListener {
+            setMethodOfSort(true)
+            binding.switchSort.isChecked = true
+
+
         }
 
 
@@ -90,8 +104,12 @@ class MainActivity : AppCompatActivity() {
     fun setMethodOfSort(isPopRated: Boolean) {
         myLog("SetMethodOfSort: $isPopRated")
         val topType = if (isPopRated) {
+            binding.tvMostPopular.setTextColor(resources.getColor(R.color.red, null))
+            binding.tvTopBest250.setTextColor(resources.getColor(R.color.gray, null))
             TopType.TOP_100_POPULAR_FILMS
         } else {
+            binding.tvMostPopular.setTextColor(resources.getColor(R.color.gray, null))
+            binding.tvTopBest250.setTextColor(resources.getColor(R.color.red, null))
             TopType.TOP_250_BEST_FILMS
         }
         viewModel.getTopRatingItems(topType, MainViewModel.NUMBER_OF_PAGE)

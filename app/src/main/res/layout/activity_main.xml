@@ -103,20 +103,20 @@
         app:layout_constraintTop_toTopOf="@+id/gl_top" />
 
     <TextView
-        android:id="@+id/tv_most_popular"
+        android:id="@+id/tv_top_best_250"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Top 100 popular films"
+        android:text="Top 250 films"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/guideline7"
         app:layout_constraintStart_toStartOf="@+id/gl_start"
         app:layout_constraintTop_toTopOf="@+id/gl_top" />
 
     <TextView
-        android:id="@+id/tv_most_rating"
+        android:id="@+id/tv_most_popular"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Top 250 films"
+        android:text="Top popular films"
         app:layout_constraintBottom_toTopOf="@+id/guideline4"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
         app:layout_constraintStart_toStartOf="@+id/guideline8"
