@@ -33,26 +33,22 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+//       viewModel.getSearchForRatingItems(ratingFrom, ratingTo, MainViewModel.NUMBER_OF_PAGE)
 
-        viewModel.getSearchForRatingItems(ratingFrom, ratingTo, MainViewModel.NUMBER_OF_PAGE)
-
-
-        binding.switch1.isChecked = false
-
+        setMethodOfSort(binding.switch1.isChecked)
+        setupRecyclerView(topItemAdapter)
+        viewModel.films_popularity.observe(this) {
+            topItemAdapter.submitList(it)
+        }
 
         binding.switch1.setOnCheckedChangeListener { buttonView, isChecked ->
             if (isChecked) {
                 setMethodOfSort(isChecked)
-                setupRecyclerView(topItemAdapter)
             } else {
-                setupRecyclerView(searchForRatingItemAdapter)
-                viewModel.films_rating.observe(this) {
-                    searchForRatingItemAdapter.submitList(it)
-                }
+                setMethodOfSort(isChecked)
             }
-
-
         }
+
 
 
 
@@ -80,7 +76,6 @@ class MainActivity : AppCompatActivity() {
         binding.rvFilms.layoutManager = GridLayoutManager(this, 2, HORIZONTAL, false)
 
 //        binding.rvFilms.layoutManager = LinearLayoutManager(this, VERTICAL, false)
-
         if (adapter.javaClass == TopItemAdapter::class.java) {
             binding.rvFilms.adapter = topItemAdapter
 
@@ -93,6 +88,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun setMethodOfSort(isPopRated: Boolean) {
+        myLog("SetMethodOfSort: $isPopRated")
         val topType = if (isPopRated) {
             TopType.TOP_100_POPULAR_FILMS
         } else {
