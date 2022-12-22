@@ -51,14 +51,14 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.tvMostPopular.setOnClickListener {
-            setMethodOfSort(false)
-            binding.switchSort.isChecked = false
+            setMethodOfSort(true)
+            binding.switchSort.isChecked = true
 
         }
 
         binding.tvTopBest250.setOnClickListener {
-            setMethodOfSort(true)
-            binding.switchSort.isChecked = true
+            setMethodOfSort(false)
+            binding.switchSort.isChecked = false
 
 
         }
