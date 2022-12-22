@@ -4,11 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.fox.myfavoritmovieapp.data.model.searchforrating.SearchForRatingItem
 import com.fox.myfavoritmovieapp.data.model.top.movie.TopItem
 import com.fox.myfavoritmovieapp.databinding.FilmItemBinding
-import com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter.SearchForRatingItemDiffCallback
-import com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter.SearchForRatingItemViewHolder
 import com.fox.myfavoritmovieapp.presentation.main.MainActivity
 import com.fox.myfavoritmovieapp.utils.GlideApp
 

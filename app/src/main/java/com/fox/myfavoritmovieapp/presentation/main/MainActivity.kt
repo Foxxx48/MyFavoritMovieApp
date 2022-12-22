@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.fox.myfavoritmovieapp.R
 import com.fox.myfavoritmovieapp.data.model.top.movie.TopType
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
+import com.fox.myfavoritmovieapp.presentation.TopItemActivity
 import com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter.SearchForRatingItemAdapter
 import com.fox.myfavoritmovieapp.presentation.adapters.topitemadapter.TopItemAdapter
 
@@ -59,9 +60,12 @@ class MainActivity : AppCompatActivity() {
         binding.tvTopBest250.setOnClickListener {
             setMethodOfSort(false)
             binding.switchSort.isChecked = false
-
-
         }
+
+       topItemAdapter.onTopItemClickListener = {
+            val intent = TopItemActivity.newIntentTopItem(this, it)
+           startActivity(intent)
+       }
 
 
 
