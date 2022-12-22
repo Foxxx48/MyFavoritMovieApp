@@ -6,11 +6,13 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
-import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import com.fox.myfavoritmovieapp.data.model.top.movie.TopType
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
 import com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter.SearchForRatingItemAdapter
+import com.fox.myfavoritmovieapp.presentation.adapters.topitemadapter.TopItemAdapter
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,28 +26,47 @@ class MainActivity : AppCompatActivity() {
     var ratingFrom = 5
     var ratingTo = 10
 
-    private lateinit var searchForRatingItemAdapter: SearchForRatingItemAdapter
+    private var searchForRatingItemAdapter = SearchForRatingItemAdapter()
+    private var topItemAdapter = TopItemAdapter()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        viewModel.getSearchForRatingItems(ratingFrom, ratingTo, MainViewModel.PAGE_OF_RATING_ITEM)
+        viewModel.getSearchForRatingItems(ratingFrom, ratingTo, MainViewModel.NUMBER_OF_PAGE)
 
-        setupRecyclerView()
 
-        viewModel.films.observe(this) {
-            searchForRatingItemAdapter.submitList(it)
+        binding.switch1.isChecked = false
+
+
+        binding.switch1.setOnCheckedChangeListener { buttonView, isChecked ->
+            if (isChecked) {
+                setMethodOfSort(isChecked)
+                setupRecyclerView(topItemAdapter)
+            } else {
+                setupRecyclerView(searchForRatingItemAdapter)
+                viewModel.films_rating.observe(this) {
+                    searchForRatingItemAdapter.submitList(it)
+                }
+            }
+
+
         }
 
+
+
         binding.btnNext.setOnClickListener {
-            viewModel.getSearchForRatingItems(ratingFrom, ratingTo, ++ MainViewModel.PAGE_OF_RATING_ITEM)
+            viewModel.getSearchForRatingItems(ratingFrom, ratingTo, ++MainViewModel.NUMBER_OF_PAGE)
         }
 
         binding.btnPrevious.setOnClickListener {
-            if (MainViewModel.PAGE_OF_RATING_ITEM != 0) {
-                viewModel.getSearchForRatingItems(ratingFrom, ratingTo, MainViewModel.PAGE_OF_RATING_ITEM --)
+            if (MainViewModel.NUMBER_OF_PAGE != 0) {
+                viewModel.getSearchForRatingItems(
+                    ratingFrom,
+                    ratingTo,
+                    MainViewModel.NUMBER_OF_PAGE--
+                )
             } else {
                 Toast.makeText(this, "It is first page", Toast.LENGTH_SHORT).show()
             }
@@ -55,12 +76,32 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    private fun setupRecyclerView() {
-        searchForRatingItemAdapter = SearchForRatingItemAdapter()
-//        binding.rvFilms.layoutManager = LinearLayoutManager(this, VERTICAL, false)
+    private fun setupRecyclerView(adapter: Any) {
         binding.rvFilms.layoutManager = GridLayoutManager(this, 2, HORIZONTAL, false)
-        binding.rvFilms.adapter = searchForRatingItemAdapter
 
+//        binding.rvFilms.layoutManager = LinearLayoutManager(this, VERTICAL, false)
+
+        if (adapter.javaClass == TopItemAdapter::class.java) {
+            binding.rvFilms.adapter = topItemAdapter
+
+        } else {
+
+            binding.rvFilms.adapter = searchForRatingItemAdapter
+        }
+
+
+    }
+
+    fun setMethodOfSort(isPopRated: Boolean) {
+        val topType = if (isPopRated) {
+            TopType.TOP_100_POPULAR_FILMS
+        } else {
+            TopType.TOP_250_BEST_FILMS
+        }
+        viewModel.getTopRatingItems(topType, MainViewModel.NUMBER_OF_PAGE)
+        viewModel.films_popularity.observe(this) {
+            topItemAdapter.submitList(it)
+        }
     }
 
     override fun onDestroy() {
