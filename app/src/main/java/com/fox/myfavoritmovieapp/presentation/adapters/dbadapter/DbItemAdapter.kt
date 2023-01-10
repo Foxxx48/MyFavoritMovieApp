@@ -1,4 +1,4 @@
-package com.fox.myfavoritmovieapp.presentation.adapters.topitemadapter
+package com.fox.myfavoritmovieapp.presentation.adapters.dbadapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -9,20 +9,20 @@ import com.fox.myfavoritmovieapp.databinding.FilmItemBinding
 import com.fox.myfavoritmovieapp.presentation.main.MainActivity
 import com.fox.myfavoritmovieapp.utils.GlideApp
 
-class TopItemAdapter : ListAdapter<TopItem, TopItemViewHolder>(
-    TopItemDiffCallback
+class DbItemAdapter : ListAdapter<TopItem, DbItemViewHolder>(
+    DbItemDiffCallback
 ) {
-    var onTopItemLongClickListener: ((TopItem) -> Unit)? = null
-    var onTopItemClickListener: ((TopItem) -> Unit)? = null
+    var onDbItemLongClickListener: ((TopItem) -> Unit)? = null
+    var onDbItemClickListener: ((TopItem) -> Unit)? = null
     var onReachEndListener: ((TopItem) -> Unit)? = null
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopItemViewHolder {
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DbItemViewHolder {
         val binding = FilmItemBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
-        return TopItemViewHolder(binding)
+        return DbItemViewHolder(binding)
     }
 
-    override fun onBindViewHolder(holder: TopItemViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: DbItemViewHolder, position: Int) {
         val filmItem = getItem(position)
 
         if (position > currentList.size  - 2) {
@@ -31,11 +31,11 @@ class TopItemAdapter : ListAdapter<TopItem, TopItemViewHolder>(
 
 
         holder.binding.root.setOnClickListener {
-            onTopItemClickListener?.invoke(filmItem)
+            onDbItemClickListener?.invoke(filmItem)
         }
 
         holder.binding.root.setOnLongClickListener {
-            onTopItemLongClickListener?.invoke(filmItem)
+            onDbItemLongClickListener?.invoke(filmItem)
             return@setOnLongClickListener true
         }
 

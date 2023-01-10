@@ -1,4 +1,4 @@
-package com.fox.myfavoritmovieapp.presentation
+package com.fox.myfavoritmovieapp.presentation.topitemactivity
 
 import android.content.Context
 import android.content.Intent
@@ -19,7 +19,8 @@ class TopItemActivity : AppCompatActivity() {
 
         val topItem = intent.getParcelableExtra<TopItem>(TOP_ITEM)
 
-        binding.textView.text = topItem?.nameRu
+        binding.tvMovieName.text = topItem?.nameRu
+        binding.tvItemId.text = topItem?.id.toString()
     }
 
     override fun onDestroy() {

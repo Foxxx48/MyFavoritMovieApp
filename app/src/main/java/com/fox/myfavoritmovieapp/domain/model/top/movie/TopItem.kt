@@ -10,8 +10,9 @@ import kotlinx.parcelize.RawValue
 
 @Parcelize
 data class TopItem(
-    @JsonProperty("filmId")
+
     var id: Int = UNDEFINED_ID,
+    @JsonProperty("filmId")
     val kinopoiskId: Int,
     val nameRu: String?,
     val nameEn: String?,

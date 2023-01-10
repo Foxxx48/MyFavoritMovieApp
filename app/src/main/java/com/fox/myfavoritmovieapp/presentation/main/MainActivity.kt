@@ -1,20 +1,20 @@
 package com.fox.myfavoritmovieapp.presentation.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.fox.myfavoritmovieapp.R
 import com.fox.myfavoritmovieapp.domain.model.top.movie.TopType
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
-import com.fox.myfavoritmovieapp.presentation.TopItemActivity
+import com.fox.myfavoritmovieapp.presentation.topitemactivity.TopItemActivity
 import com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter.SearchForRatingItemAdapter
 import com.fox.myfavoritmovieapp.presentation.adapters.topitemadapter.TopItemAdapter
+import com.fox.myfavoritmovieapp.presentation.dbactivity.MyDatabaseActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -76,19 +76,12 @@ class MainActivity : AppCompatActivity() {
 
 
         binding.btnNext.setOnClickListener {
-            viewModel.getSearchForRatingItems(ratingFrom, ratingTo, ++MainViewModel.NUMBER_OF_PAGE)
+            val intent = Intent(this, MyDatabaseActivity::class.java)
+            startActivity(intent)
         }
 
         binding.btnPrevious.setOnClickListener {
-            if (MainViewModel.NUMBER_OF_PAGE != 0) {
-                viewModel.getSearchForRatingItems(
-                    ratingFrom,
-                    ratingTo,
-                    MainViewModel.NUMBER_OF_PAGE--
-                )
-            } else {
-                Toast.makeText(this, "It is first page", Toast.LENGTH_SHORT).show()
-            }
+
 
         }
 
