@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.fox.myfavoritmovieapp.databinding.ActivityMyDatabaseBinding
 import com.fox.myfavoritmovieapp.presentation.adapters.dbadapter.DbItemAdapter
@@ -29,14 +31,33 @@ class MyDatabaseActivity : AppCompatActivity() {
             myDbItemAdapter.submitList(it)
         }
 
-        myDbItemAdapter.onDbItemLongClickListener = {
-            viewModel.deleteMovieItem(it)
-        }
     }
 
     fun setupRecyclerView() {
         binding.rvDatabaseMovies.layoutManager = GridLayoutManager(this, 2, VERTICAL, false)
         binding.rvDatabaseMovies.adapter = myDbItemAdapter
+        setupSwipeListener(binding.rvDatabaseMovies)
+    }
+
+    private fun setupSwipeListener(rvPurchaseList: RecyclerView) {
+        val callback = object :
+            ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val item = myDbItemAdapter.currentList[viewHolder.adapterPosition]
+                viewModel.deleteMovieItem(item)
+            }
+        }
+
+        val itemTouchHelper = ItemTouchHelper(callback)
+        itemTouchHelper.attachToRecyclerView(binding.rvDatabaseMovies)
     }
 
 
