@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_margin="16dp"
+    android:paddingStart="38dp"
     android:background="@color/black"
     tools:context=".presentation.dbactivity.MyDatabaseActivity">
 

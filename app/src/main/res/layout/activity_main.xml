@@ -62,7 +62,7 @@
         android:layout_width="130dp"
         android:layout_height="40dp"
         android:backgroundTint="#689A92"
-        android:text="MyDbActivity"
+        android:text="Db Activity"
         app:layout_constraintBottom_toTopOf="@+id/gl_bottom"
         app:layout_constraintEnd_toStartOf="@+id/gl_end"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
