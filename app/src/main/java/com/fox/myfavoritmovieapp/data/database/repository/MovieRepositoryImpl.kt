@@ -10,6 +10,7 @@ import com.fox.myfavoritmovieapp.domain.MovieRepository
 import com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem
 
 class MovieRepositoryImpl(application: Application) : MovieRepository {
+
     private val movieDao = MovieDatabase.getInstance(application).movieDao()
     private val movieMapper = MovieMapper()
 

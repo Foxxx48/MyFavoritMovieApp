@@ -1,5 +1,7 @@
 package com.fox.myfavoritmovieapp.presentation.main
 
+import android.app.Application
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -12,14 +14,14 @@ import com.fox.myfavoritmovieapp.utils.NetworkUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class MainViewModel : ViewModel() {
+class MainViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _films_rating = MutableLiveData<List<com.fox.myfavoritmovieapp.domain.model.searchforrating.SearchForRatingItem>>()
-    val films_rating: LiveData<List<com.fox.myfavoritmovieapp.domain.model.searchforrating.SearchForRatingItem>>
+    private val _films_rating = MutableLiveData<List<SearchForRatingItem>>()
+    val films_rating: LiveData<List<SearchForRatingItem>>
         get() = _films_rating
 
-    private val _films_popularity = MutableLiveData<List<com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem>>()
-    val films_popularity: LiveData<List<com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem>>
+    private val _films_popularity = MutableLiveData<List<TopItem>>()
+    val films_popularity: LiveData<List<TopItem>>
         get() = _films_popularity
 
 
@@ -32,7 +34,7 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun getTopRatingItems(topType: com.fox.myfavoritmovieapp.domain.model.top.movie.TopType, page: Int) {
+    fun getTopRatingItems(topType: TopType, page: Int) {
         viewModelScope.launch(Dispatchers.IO) {
             val kinopoiskApiService = KinopoiskApiService(NetworkUtils.API_KEY2, 10000)
             val data = kinopoiskApiService.getTop(topType, page)

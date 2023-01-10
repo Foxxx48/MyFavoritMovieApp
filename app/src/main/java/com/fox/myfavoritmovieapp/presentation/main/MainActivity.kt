@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         topItemAdapter.onReachEndListener = {
             Toast.makeText(this, "End of List", Toast.LENGTH_SHORT).show()
-            viewModel.getTopRatingItems(com.fox.myfavoritmovieapp.domain.model.top.movie.TopType.TOP_250_BEST_FILMS, MainViewModel.NUMBER_OF_PAGE ++)
+            viewModel.getTopRatingItems(TopType.TOP_250_BEST_FILMS, MainViewModel.NUMBER_OF_PAGE ++)
         }
 
 
