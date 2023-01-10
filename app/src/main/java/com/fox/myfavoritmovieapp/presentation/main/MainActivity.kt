@@ -67,6 +67,11 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        topItemAdapter.onTopItemLongClickListener = {
+            viewModel.addItemToDb(it)
+            Toast.makeText(this, "Film added to DB", Toast.LENGTH_SHORT).show()
+        }
+
         topItemAdapter.onReachEndListener = {
             Toast.makeText(this, "End of List", Toast.LENGTH_SHORT).show()
             viewModel.getTopRatingItems(TopType.TOP_250_BEST_FILMS, MainViewModel.NUMBER_OF_PAGE ++)
@@ -75,7 +80,7 @@ class MainActivity : AppCompatActivity() {
 
 
 
-        binding.btnNext.setOnClickListener {
+        binding.btnDbActivity.setOnClickListener {
             val intent = Intent(this, MyDatabaseActivity::class.java)
             startActivity(intent)
         }

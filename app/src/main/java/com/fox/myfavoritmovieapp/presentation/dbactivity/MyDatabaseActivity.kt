@@ -3,6 +3,7 @@ package com.fox.myfavoritmovieapp.presentation.dbactivity
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import com.fox.myfavoritmovieapp.databinding.ActivityMyDatabaseBinding
@@ -27,12 +28,10 @@ class MyDatabaseActivity : AppCompatActivity() {
         viewModel.movieList.observe(this) {
             myDbItemAdapter.submitList(it)
         }
-
-
     }
 
     fun setupRecyclerView() {
-        binding.rvDatabaseMovies.layoutManager = LinearLayoutManager(this, VERTICAL, false)
+        binding.rvDatabaseMovies.layoutManager = GridLayoutManager(this, 2, VERTICAL, false)
         binding.rvDatabaseMovies.adapter = myDbItemAdapter
     }
 

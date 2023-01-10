@@ -4,8 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.fox.myfavoritmovieapp.data.database.repository.MovieRepositoryImpl
+import com.fox.myfavoritmovieapp.domain.AddMovieUseCase
 import com.fox.myfavoritmovieapp.domain.model.searchforrating.SearchForRatingItem
 import com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem
 import com.fox.myfavoritmovieapp.domain.model.top.movie.TopType
@@ -15,6 +16,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val repository = MovieRepositoryImpl(application)
+
+   private val addMovieUseCase = AddMovieUseCase(repository)
+
 
     private val _films_rating = MutableLiveData<List<SearchForRatingItem>>()
     val films_rating: LiveData<List<SearchForRatingItem>>
@@ -41,6 +47,13 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
             var myFilms = data.getOrThrowException().films
             _films_popularity.postValue(myFilms)
         }
+    }
+
+    fun addItemToDb(topItem: TopItem) {
+        viewModelScope.launch(Dispatchers.IO) {
+            addMovieUseCase(topItem)
+        }
+
     }
 
     companion object {
