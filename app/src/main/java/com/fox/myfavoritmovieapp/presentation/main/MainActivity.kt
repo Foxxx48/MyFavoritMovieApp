@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.HORIZONTAL
 import com.fox.myfavoritmovieapp.R
-import com.fox.myfavoritmovieapp.data.model.top.movie.TopType
+import com.fox.myfavoritmovieapp.domain.model.top.movie.TopType
 import com.fox.myfavoritmovieapp.databinding.ActivityMainBinding
 import com.fox.myfavoritmovieapp.presentation.TopItemActivity
 import com.fox.myfavoritmovieapp.presentation.adapters.searchforratingitemadapter.SearchForRatingItemAdapter
@@ -69,7 +69,7 @@ class MainActivity : AppCompatActivity() {
 
         topItemAdapter.onReachEndListener = {
             Toast.makeText(this, "End of List", Toast.LENGTH_SHORT).show()
-            viewModel.getTopRatingItems(TopType.TOP_250_BEST_FILMS, MainViewModel.NUMBER_OF_PAGE ++)
+            viewModel.getTopRatingItems(com.fox.myfavoritmovieapp.domain.model.top.movie.TopType.TOP_250_BEST_FILMS, MainViewModel.NUMBER_OF_PAGE ++)
         }
 
 
@@ -115,11 +115,11 @@ class MainActivity : AppCompatActivity() {
         val topType = if (isPopRated) {
             binding.tvMostPopular.setTextColor(resources.getColor(R.color.red, null))
             binding.tvTopBest250.setTextColor(resources.getColor(R.color.gray, null))
-            TopType.TOP_100_POPULAR_FILMS
+            com.fox.myfavoritmovieapp.domain.model.top.movie.TopType.TOP_100_POPULAR_FILMS
         } else {
             binding.tvMostPopular.setTextColor(resources.getColor(R.color.gray, null))
             binding.tvTopBest250.setTextColor(resources.getColor(R.color.red, null))
-            TopType.TOP_250_BEST_FILMS
+            com.fox.myfavoritmovieapp.domain.model.top.movie.TopType.TOP_250_BEST_FILMS
         }
         viewModel.getTopRatingItems(topType, MainViewModel.NUMBER_OF_PAGE)
         viewModel.films_popularity.observe(this) {

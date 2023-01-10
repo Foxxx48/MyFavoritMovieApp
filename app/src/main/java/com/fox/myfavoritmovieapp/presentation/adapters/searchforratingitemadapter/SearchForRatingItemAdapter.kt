@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.fox.myfavoritmovieapp.data.model.searchforrating.SearchForRatingItem
+import com.fox.myfavoritmovieapp.domain.model.searchforrating.SearchForRatingItem
 
 import com.fox.myfavoritmovieapp.databinding.FilmItemBinding
 import com.fox.myfavoritmovieapp.presentation.main.MainActivity
 import com.fox.myfavoritmovieapp.utils.GlideApp
 
-class SearchForRatingItemAdapter() : ListAdapter<SearchForRatingItem, SearchForRatingItemViewHolder>(SearchForRatingItemDiffCallback) {
+class SearchForRatingItemAdapter() : ListAdapter<com.fox.myfavoritmovieapp.domain.model.searchforrating.SearchForRatingItem, SearchForRatingItemViewHolder>(SearchForRatingItemDiffCallback) {
 
-    var onFilmItemLongClickListener: ((SearchForRatingItem) -> Unit)? = null
-    var onFilmItemClickListener: ((SearchForRatingItem) -> Unit)? = null
+    var onFilmItemLongClickListener: ((com.fox.myfavoritmovieapp.domain.model.searchforrating.SearchForRatingItem) -> Unit)? = null
+    var onFilmItemClickListener: ((com.fox.myfavoritmovieapp.domain.model.searchforrating.SearchForRatingItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): SearchForRatingItemViewHolder {
         val binding = FilmItemBinding

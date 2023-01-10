@@ -1,14 +1,17 @@
-package com.fox.myfavoritmovieapp.data.database
+package com.fox.myfavoritmovieapp.domain.model.top.movie
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+
+import android.os.Parcelable
+import com.fasterxml.jackson.annotation.JsonProperty
 import com.fox.myfavoritmovieapp.domain.model.common.Country
 import com.fox.myfavoritmovieapp.domain.model.common.Genre
+import kotlinx.parcelize.Parcelize
+import kotlinx.parcelize.RawValue
 
-@Entity(tableName = "movies")
-data class MovieDbModel(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int = 0,
+@Parcelize
+data class TopItem(
+    @JsonProperty("filmId")
+    var id: Int = UNDEFINED_ID,
     val kinopoiskId: Int,
     val nameRu: String?,
     val nameEn: String?,
@@ -23,4 +26,8 @@ data class MovieDbModel(
     val ratingChange: Int?,
     val isRatingUp: Int?,
     val isAfisha: Int
-)
+) : Parcelable {
+    companion object {
+        const val UNDEFINED_ID = 0
+    }
+}

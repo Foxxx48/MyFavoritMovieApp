@@ -14,14 +14,14 @@ interface MovieDao {
     fun getMoviesList(): LiveData<List<MovieDbModel>>
 
     @Insert(entity = MovieDbModel::class, onConflict = REPLACE)
-    suspend fun addMovie(note: MovieDbModel)
+    suspend fun addMovie(movieDbModel: MovieDbModel)
 
-    @Query("DELETE FROM movies WHERE id=:noteId")
-    suspend fun deleteMovie(noteId: Int)
+    @Query("DELETE FROM movies WHERE id=:movieId")
+    suspend fun deleteMovie(movieId: Int)
 
     @Query("SELECT * FROM movies WHERE id=:movieId LIMIT 1")
     suspend fun getMovie(movieId: Int): MovieDbModel
 
     @Update(onConflict = REPLACE)
-    suspend fun updateMovie(movie: MovieDbModel)
+    suspend fun updateMovie(movieDbModel: MovieDbModel)
 }

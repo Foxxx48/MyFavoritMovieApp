@@ -4,7 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.fox.myfavoritmovieapp.data.model.top.movie.TopItem
+import com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem
 import com.fox.myfavoritmovieapp.databinding.ActivityTopItemBinding
 
 class TopItemActivity : AppCompatActivity() {
@@ -15,7 +15,7 @@ class TopItemActivity : AppCompatActivity() {
         _binding = ActivityTopItemBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val topItem = intent.getParcelableExtra<TopItem>(TOP_ITEM)
+        val topItem = intent.getParcelableExtra<com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem>(TOP_ITEM)
 
         binding.textView.text = topItem?.nameRu
     }
@@ -31,7 +31,7 @@ class TopItemActivity : AppCompatActivity() {
     companion object{
         val TOP_ITEM = "top_item"
 
-        fun newIntentTopItem(context: Context, topItem: TopItem ): Intent {
+        fun newIntentTopItem(context: Context, topItem: com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem): Intent {
            val intent = Intent(context, TopItemActivity::class.java)
             intent.putExtra(TOP_ITEM, topItem)
             return intent

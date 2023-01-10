@@ -3,7 +3,7 @@ package com.fox.myfavoritmovieapp.service
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fox.myfavoritmovieapp.data.model.MyResult
+import com.fox.myfavoritmovieapp.domain.model.MyResult
 import com.fox.myfavoritmovieapp.presentation.main.MainActivity
 import com.github.kittinunf.fuel.httpGet
 
@@ -28,7 +28,7 @@ internal class KPApiClientService(private val token: String, private val timeout
         const val SEARCH_BY_KEYWORD = "/search-by-keyword"
     }
 
-    fun <T> request(url: String, path: String, clazz: Class<T>): MyResult<T> {
+    fun <T> request(url: String, path: String, clazz: Class<T>): com.fox.myfavoritmovieapp.domain.model.MyResult<T> {
         val (request, response, result) = (url + path)
             .httpGet()
             .timeout(timeout)
@@ -44,11 +44,11 @@ internal class KPApiClientService(private val token: String, private val timeout
         MainActivity.myLog("Path:$path")
 
         return when (result) {
-            is com.github.kittinunf.result.Result.Failure -> MyResult.Failure(
+            is com.github.kittinunf.result.Result.Failure -> com.fox.myfavoritmovieapp.domain.model.MyResult.Failure(
                 httpStatus = response.statusCode,
                 error = response.responseMessage
             )
-            is com.github.kittinunf.result.Result.Success -> MyResult.Success(
+            is com.github.kittinunf.result.Result.Success -> com.fox.myfavoritmovieapp.domain.model.MyResult.Success(
                 httpStatus = response.statusCode,
                 result = mapper.readValue(result.get(), clazz)
             )

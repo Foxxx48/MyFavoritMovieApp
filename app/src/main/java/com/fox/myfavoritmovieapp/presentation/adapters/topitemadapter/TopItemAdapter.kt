@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.fox.myfavoritmovieapp.data.model.top.movie.TopItem
+import com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem
 import com.fox.myfavoritmovieapp.databinding.FilmItemBinding
 import com.fox.myfavoritmovieapp.presentation.main.MainActivity
 import com.fox.myfavoritmovieapp.utils.GlideApp
 
-class TopItemAdapter : ListAdapter<TopItem, TopItemViewHolder>(
+class TopItemAdapter : ListAdapter<com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem, TopItemViewHolder>(
     TopItemDiffCallback
 ) {
-    var onTopItemLongClickListener: ((TopItem) -> Unit)? = null
-    var onTopItemClickListener: ((TopItem) -> Unit)? = null
-    var onReachEndListener: ((TopItem) -> Unit)? = null
+    var onTopItemLongClickListener: ((com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem) -> Unit)? = null
+    var onTopItemClickListener: ((com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem) -> Unit)? = null
+    var onReachEndListener: ((com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem) -> Unit)? = null
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopItemViewHolder {
         val binding = FilmItemBinding
