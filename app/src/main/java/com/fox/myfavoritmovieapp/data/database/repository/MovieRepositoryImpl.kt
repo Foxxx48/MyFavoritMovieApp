@@ -18,6 +18,10 @@ class MovieRepositoryImpl(application: Application) : MovieRepository {
         movieDao.addMovie(movieMapper.mapEntityToDbModel(topItem))
     }
 
+    override suspend fun deleteMovie(topItem: TopItem) {
+        movieDao.deleteMovie(topItem.id)
+    }
+
     override suspend fun getMovie(movieId: Int): TopItem {
         val movie = movieDao.getMovie(movieId)
         return movieMapper.mapDbModelToEntity(movie)

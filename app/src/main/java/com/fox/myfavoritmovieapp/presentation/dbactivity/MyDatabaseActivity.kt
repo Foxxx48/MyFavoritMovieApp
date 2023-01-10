@@ -28,12 +28,17 @@ class MyDatabaseActivity : AppCompatActivity() {
         viewModel.movieList.observe(this) {
             myDbItemAdapter.submitList(it)
         }
+
+        myDbItemAdapter.onDbItemLongClickListener = {
+            viewModel.deleteMovieItem(it)
+        }
     }
 
     fun setupRecyclerView() {
         binding.rvDatabaseMovies.layoutManager = GridLayoutManager(this, 2, VERTICAL, false)
         binding.rvDatabaseMovies.adapter = myDbItemAdapter
     }
+
 
     override fun onDestroy() {
         super.onDestroy()

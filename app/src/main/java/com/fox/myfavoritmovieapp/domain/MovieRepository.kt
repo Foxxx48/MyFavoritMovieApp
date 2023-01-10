@@ -7,9 +7,13 @@ interface MovieRepository {
 
     suspend fun addMovie(topItem: TopItem)
 
+    suspend fun deleteMovie(topItem: TopItem)
+
     suspend fun getMovie(movieId: Int): TopItem
 
     fun getListMovies(): LiveData<List<TopItem>>
+
+
 
 
 
