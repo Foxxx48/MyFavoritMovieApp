@@ -1,5 +1,6 @@
 package com.fox.myfavoritmovieapp.presentation.dbactivity
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
@@ -8,8 +9,11 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import com.fox.myfavoritmovieapp.R
 import com.fox.myfavoritmovieapp.databinding.ActivityMyDatabaseBinding
+import com.fox.myfavoritmovieapp.domain.model.top.movie.TopItem
 import com.fox.myfavoritmovieapp.presentation.adapters.dbadapter.DbItemAdapter
+import com.fox.myfavoritmovieapp.presentation.dbitemfragment.DbItemFragment
 
 class MyDatabaseActivity : AppCompatActivity() {
 
@@ -19,6 +23,7 @@ class MyDatabaseActivity : AppCompatActivity() {
     private val myDbItemAdapter = DbItemAdapter()
     private lateinit var viewModel: MyDatabaseViewModel
 
+    @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         _binding = ActivityMyDatabaseBinding.inflate(layoutInflater)
@@ -33,6 +38,19 @@ class MyDatabaseActivity : AppCompatActivity() {
 
         binding.btnDeleteAll.setOnClickListener {
             viewModel.deleteAllMovieItems()
+        }
+
+        myDbItemAdapter.onDbItemClickListener = {
+            viewModel.getMovieItem(it.id)
+
+            viewModel.movieItem.observe(this) { it ->
+                val fragment = DbItemFragment.newInstance(it)
+                supportFragmentManager.beginTransaction()
+                    .replace(R.id.fragmentContainerView3, fragment)
+                    .commit()
+            }
+
+
         }
 
     }

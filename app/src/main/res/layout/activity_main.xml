@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".presentation.main.MainActivity">
 
+
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/gl_top"
         android:layout_width="wrap_content"
@@ -60,7 +61,7 @@
     <Button
         android:id="@+id/btn_db_activity"
         android:layout_width="130dp"
-        android:layout_height="40dp"
+        android:layout_height="48dp"
         android:backgroundTint="#689A92"
         android:text="Db Activity"
         app:layout_constraintBottom_toTopOf="@+id/gl_bottom"

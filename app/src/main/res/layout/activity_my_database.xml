@@ -63,4 +63,14 @@
         app:layout_constraintStart_toStartOf="@+id/gl_start2"
         app:layout_constraintTop_toTopOf="@+id/guideline10" />
 
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView3"
+        android:name="com.fox.myfavoritmovieapp.presentation.dbitemfragment.DbItemFragment"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
