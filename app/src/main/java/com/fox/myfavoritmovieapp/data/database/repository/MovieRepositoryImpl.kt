@@ -32,4 +32,8 @@ class MovieRepositoryImpl(application: Application) : MovieRepository {
     ) {
         movieMapper.mapListDbModelToListEntity(it)
     }
+
+    override suspend fun deleteAllMovies() {
+        movieDao.deleteAllMovies()
+    }
 }

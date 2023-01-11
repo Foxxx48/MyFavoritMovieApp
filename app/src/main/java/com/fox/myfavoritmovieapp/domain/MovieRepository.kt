@@ -13,8 +13,6 @@ interface MovieRepository {
 
     fun getListMovies(): LiveData<List<TopItem>>
 
-
-
-
+    suspend fun deleteAllMovies()
 
 }

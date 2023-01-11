@@ -4,17 +4,63 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="16dp"
-    android:paddingStart="38dp"
     android:background="@color/black"
     tools:context=".presentation.dbactivity.MyDatabaseActivity">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_top2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="8dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_bottom2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="8dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_start2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="8dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/gl_end2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_end="8dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline10"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_end="137dp" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_database_movies"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:paddingStart="36dp"
+        app:layout_constraintBottom_toBottomOf="@id/guideline10"
+        app:layout_constraintEnd_toEndOf="@id/gl_end2"
+        app:layout_constraintStart_toStartOf="@id/gl_start2"
+        app:layout_constraintTop_toTopOf="@id/gl_top2" />
+
+    <Button
+        android:id="@+id/btn_delete_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#15B8A9"
+        android:text="Delete All Movies"
+        app:layout_constraintBottom_toTopOf="@+id/gl_bottom2"
+        app:layout_constraintEnd_toStartOf="@+id/gl_end2"
+        app:layout_constraintStart_toStartOf="@+id/gl_start2"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

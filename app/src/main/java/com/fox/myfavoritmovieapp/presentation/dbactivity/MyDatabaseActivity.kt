@@ -31,11 +31,16 @@ class MyDatabaseActivity : AppCompatActivity() {
             myDbItemAdapter.submitList(it)
         }
 
+        binding.btnDeleteAll.setOnClickListener {
+            viewModel.deleteAllMovieItems()
+        }
+
     }
 
     fun setupRecyclerView() {
         binding.rvDatabaseMovies.layoutManager = GridLayoutManager(this, 2, VERTICAL, false)
         binding.rvDatabaseMovies.adapter = myDbItemAdapter
+        binding.rvDatabaseMovies.itemAnimator = null
         setupSwipeListener(binding.rvDatabaseMovies)
     }
 

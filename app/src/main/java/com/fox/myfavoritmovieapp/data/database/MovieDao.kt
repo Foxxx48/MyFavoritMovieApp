@@ -22,6 +22,8 @@ interface MovieDao {
     @Query("SELECT * FROM movies WHERE id=:movieId LIMIT 1")
     suspend fun getMovie(movieId: Int): MovieDbModel
 
-    @Update(onConflict = REPLACE)
-    suspend fun updateMovie(movieDbModel: MovieDbModel)
+    @Query("DELETE FROM movies")
+    suspend fun deleteAllMovies()
+
+
 }

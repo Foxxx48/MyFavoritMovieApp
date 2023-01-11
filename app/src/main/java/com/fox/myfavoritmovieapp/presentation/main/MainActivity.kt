@@ -103,7 +103,11 @@ class MainActivity : AppCompatActivity() {
         } else {
 
             binding.rvFilms.adapter = searchForRatingItemAdapter
+
+
         }
+
+        binding.rvFilms.itemAnimator = null
 
 
     }
@@ -113,11 +117,11 @@ class MainActivity : AppCompatActivity() {
         val topType = if (isPopRated) {
             binding.tvMostPopular.setTextColor(resources.getColor(R.color.red, null))
             binding.tvTopBest250.setTextColor(resources.getColor(R.color.gray, null))
-            com.fox.myfavoritmovieapp.domain.model.top.movie.TopType.TOP_100_POPULAR_FILMS
+            TopType.TOP_100_POPULAR_FILMS
         } else {
             binding.tvMostPopular.setTextColor(resources.getColor(R.color.gray, null))
             binding.tvTopBest250.setTextColor(resources.getColor(R.color.red, null))
-            com.fox.myfavoritmovieapp.domain.model.top.movie.TopType.TOP_250_BEST_FILMS
+            TopType.TOP_250_BEST_FILMS
         }
         viewModel.getTopRatingItems(topType, MainViewModel.NUMBER_OF_PAGE)
         viewModel.films_popularity.observe(this) {
