@@ -42,6 +42,18 @@
         android:orientation="horizontal"
         app:layout_constraintGuide_end="137dp" />
 
+    <Button
+        android:id="@+id/btn_delete_all"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#15B8A9"
+        android:text="Delete All Movies"
+        android:textColor="#4E342E"
+        app:layout_constraintBottom_toTopOf="@+id/gl_bottom2"
+        app:layout_constraintEnd_toStartOf="@+id/gl_end2"
+        app:layout_constraintStart_toStartOf="@+id/gl_start2"
+        app:layout_constraintTop_toTopOf="@+id/guideline10" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_database_movies"
         android:layout_width="0dp"
@@ -52,25 +64,12 @@
         app:layout_constraintStart_toStartOf="@id/gl_start2"
         app:layout_constraintTop_toTopOf="@id/gl_top2" />
 
-    <Button
-        android:id="@+id/btn_delete_all"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#15B8A9"
-        android:text="Delete All Movies"
-        app:layout_constraintBottom_toTopOf="@+id/gl_bottom2"
-        app:layout_constraintEnd_toStartOf="@+id/gl_end2"
-        app:layout_constraintStart_toStartOf="@+id/gl_start2"
-        app:layout_constraintTop_toTopOf="@+id/guideline10" />
-
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/fragmentContainerView3"
         android:name="com.fox.myfavoritmovieapp.presentation.dbitemfragment.DbItemFragment"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+
+        tools:layout="@layout/fragment_db_item" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

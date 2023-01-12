@@ -42,7 +42,8 @@ class MyDatabaseViewModel(application: Application) : AndroidViewModel(applicati
 
     fun getMovieItem(movieId: Int) {
         viewModelScope.launch {
-            _movieItem.value = getMovieUseCase(movieId)
+            val item= getMovieUseCase(movieId)
+            _movieItem.value = item
         }
     }
 }

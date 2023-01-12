@@ -30,9 +30,6 @@ class DbItemAdapter : ListAdapter<TopItem, DbItemViewHolder>(
             onReachEndListener?.invoke(filmItem)
         }
 
-
-
-
         holder.binding.root.setOnClickListener {
             onDbItemClickListener?.invoke(filmItem)
         }

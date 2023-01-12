@@ -18,7 +18,8 @@ import com.fox.myfavoritmovieapp.presentation.dbitemfragment.DbItemFragment
 class MyDatabaseActivity : AppCompatActivity() {
 
     private var _binding: ActivityMyDatabaseBinding? = null
-    private val binding get() = _binding ?: throw RuntimeException("ActivityMyDatabaseBinding = null")
+    private val binding
+        get() = _binding ?: throw RuntimeException("ActivityMyDatabaseBinding = null")
 
     private val myDbItemAdapter = DbItemAdapter()
     private lateinit var viewModel: MyDatabaseViewModel
@@ -43,12 +44,19 @@ class MyDatabaseActivity : AppCompatActivity() {
         myDbItemAdapter.onDbItemClickListener = {
             viewModel.getMovieItem(it.id)
 
-            viewModel.movieItem.observe(this) { it ->
-                val fragment = DbItemFragment.newInstance(it)
-                supportFragmentManager.beginTransaction()
-                    .replace(R.id.fragmentContainerView3, fragment)
-                    .commit()
-            }
+            val fragment = DbItemFragment.newInstance(it)
+            supportFragmentManager.popBackStack()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.fragmentContainerView3, fragment)
+                .commit()
+
+
+//            viewModel.movieItem.observe(this) { it ->
+//                val fragment = DbItemFragment.newInstance(it)
+//                supportFragmentManager.beginTransaction()
+//                    .replace(R.id.fragmentContainerView3, fragment)
+//                    .commit()
+//            }
 
 
         }
