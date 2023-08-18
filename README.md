@@ -15,6 +15,7 @@ Added the ability to add a movie to your database and delete it from it.
 <br />
 
 ### Technology stack:
+- Android SDK
 - Kotlin
 - MVVM
 - Retrofit
